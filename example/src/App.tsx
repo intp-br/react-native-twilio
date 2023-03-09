@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-twilio';
+import { multiply } from '@intp-br/react-native-twilio';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    multiply(10, 7).then(setResult);
   }, []);
 
   return (
