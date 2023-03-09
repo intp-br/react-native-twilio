@@ -2,30 +2,124 @@
 
 Native modules built with Kotlin and Swift that integrates Twilio official SDK's.
 
+Only to start/stop calls. Don't need FCM configuration because this package don't receive calls.
+
 ## Installation
 
 ```sh
-npm install react-native-twilio
+yarn add @intp-br/react-native-twilio
 ```
+
+## TODO
+
+- Android (Kotlin) implementation
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-twilio';
+import * as React from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import {
+  endCall,
+  EventType,
+  reactNativeTwilioOutboundCallsEmitter,
+  startCall,
+} from '@intp-br/react-native-twilio';
 
-// ...
+export default function App() {
+  const [callInProgress, setCallInProgress] = React.useState(false);
 
-const result = await multiply(3, 7);
+  const placeCall = async () => {
+    try {
+      startCall('your_token_here  ', { foo: 'bar' });
+    } catch (error) {
+      console.log(`placeCall LOG:  error:`, error);
+    }
+  };
+
+  const hangUp = async () => {
+    try {
+      endCall();
+    } catch (error) {
+      console.log(`hangUp LOG:  error:`, error);
+    }
+  };
+
+  React.useEffect(() => {
+    const subscriptions = [
+      reactNativeTwilioOutboundCallsEmitter.addListener(
+        EventType.CallConnected,
+        () => {
+          console.log(`CallConnected`);
+          setCallInProgress(true);
+        }
+      ),
+      reactNativeTwilioOutboundCallsEmitter.addListener(
+        EventType.CallDisconnected,
+        () => {
+          console.log(`CallDisconnected`);
+          setCallInProgress(false);
+        }
+      ),
+      reactNativeTwilioOutboundCallsEmitter.addListener(
+        EventType.CallConnectFailure,
+        (data) => {
+          console.log(`CallConnectFailure:`, data);
+          setCallInProgress(false);
+        }
+      ),
+      reactNativeTwilioOutboundCallsEmitter.addListener(
+        EventType.CallDisconnectedError,
+        (data) => {
+          console.log(`CallDisconnectedError:`, data);
+          setCallInProgress(false);
+        }
+      ),
+    ];
+    return () => {
+      subscriptions.map((subscription) => {
+        subscription.remove();
+      });
+    };
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text>Call in progress: {callInProgress ? 'Yes' : 'No'}</Text>
+      <Button
+        title={callInProgress ? 'Hang up call' : 'Place call'}
+        onPress={() => (callInProgress ? hangUp() : placeCall())}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: 60,
+    height: 60,
+    marginVertical: 20,
+  },
+});
 ```
 
-## Contributing
+## Version of Twilio SDK
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+- [v6.1.2 (Android)](https://www.twilio.com/docs/voice/sdks/android/3x-changelog#612)
+- [v6.5.0 (iOS)](https://www.twilio.com/docs/voice/sdks/ios/changelog#650)
+
+## Twilio official SDK's
+
+iOS [ios-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/ios)
+Android [android-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/android)
 
 ## License
 
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
