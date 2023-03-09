@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
 
 ## Twilio official SDK's
 
-iOS [ios-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/ios)
-Android [android-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/android)
+- iOS [ios-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/ios)
+- Android [android-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/android)
 
 ## License
 
