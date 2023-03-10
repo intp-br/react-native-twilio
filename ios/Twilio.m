@@ -3,7 +3,7 @@
 
 @interface RCT_EXTERN_MODULE(Twilio, NSObject)
 
-RCT_EXTERN_METHOD(isConnected: resolver:(RCTPromiseResolveBlock)resolve withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(isConnected: (RCTPromiseResolveBlock)resolve)
 
 RCT_EXTERN_METHOD(startCall:(NSString *)accessToken withParams:(NSDictionary *)params)
 

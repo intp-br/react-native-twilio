@@ -82,6 +82,7 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
         params.putString("errorMessage", error.message)
 
         sendEvent(reactApplicationContext, "CallConnectFailure", params)
+        activeCall = null
       }
 
       override fun onConnected(call: Call) {
@@ -91,9 +92,11 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
         params.putString("callSid", call.sid)
 
         sendEvent(reactApplicationContext, "CallConnected", params)
+        activeCall = call
       }
 
       override fun onReconnecting(call: Call, error: CallException) {
+        activeCall = null
         Log.e(tag, "Call is reconnecting with error: ${error.errorCode}, ${error.message}")
 
         val params = Arguments.createMap()
@@ -105,6 +108,7 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
       }
 
       override fun onReconnected(call: Call) {
+        activeCall = call
         Log.d(tag, "Call did reconnect")
 
         val params = Arguments.createMap()
@@ -114,6 +118,8 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
       }
 
       override fun onDisconnected(call: Call, error: CallException?) {
+        activeCall = null
+
         val params = Arguments.createMap()
         params.putString("callSid", call.sid)
 
@@ -166,12 +172,6 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
   fun exitApp() {
     Log.i(tag, "exitApp")
     exitProcess(0)
-  }
-
-  @ReactMethod
-  fun isConnected() {
-    Log.i(tag, "isConnected")
-    //
   }
 
   companion object {

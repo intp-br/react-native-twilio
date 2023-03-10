@@ -1,6 +1,7 @@
 import {
   endCall,
   EventType,
+  isConnected,
   startCall,
   twilioEmitter,
 } from '@intp-br/react-native-twilio';
@@ -27,7 +28,7 @@ export default function App() {
       }
     }
     console.log('Place call');
-    startCall('YOUR_TOKEN', { foo: 'bar' });
+    startCall('xpto', { foo: 'bar' });
   };
 
   const askRecordAudioPermission = async () => {
@@ -80,6 +81,11 @@ export default function App() {
     };
   }, []);
 
+  const checkIfIsConnected = async () => {
+    const _isConnected = await isConnected();
+    console.log('isConnected: ', _isConnected);
+  };
+
   return (
     <View style={styles.container}>
       <Text>Call in progress: {callInProgress ? 'Yes' : 'No'}</Text>
@@ -87,6 +93,7 @@ export default function App() {
         title={callInProgress ? 'Hang up call' : 'Place call'}
         onPress={() => (callInProgress ? hangUp() : placeCall())}
       />
+      <Button title="Check if is connected" onPress={checkIfIsConnected} />
     </View>
   );
 }

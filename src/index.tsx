@@ -20,10 +20,6 @@ const Twilio = NativeModules.Twilio
 
 export const twilioEmitter = new NativeEventEmitter(Twilio);
 
-export function isConnected(): Promise<boolean> {
-  return Twilio.isConnected();
-}
-
 export function startCall(
   accessToken: string,
   params: Record<string, string>
@@ -37,4 +33,8 @@ export function endCall(): void {
 
 export function exitApp() {
   return Twilio.exitApp();
+}
+
+export function isConnected(): Promise<boolean> {
+  return Twilio.isConnected();
 }

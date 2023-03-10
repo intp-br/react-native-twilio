@@ -34,6 +34,7 @@ class Twilio: RCTEventEmitter, CallDelegate {
     }
 
     func callDidFailToConnect(call: Call, error: Error) {
+        activeCall = nil
         NSLog("[TwilioPhone] Call failed to connect: \(error.localizedDescription)")
 
         if hasListeners {
@@ -45,6 +46,7 @@ class Twilio: RCTEventEmitter, CallDelegate {
     }
 
     func callIsReconnecting(call: Call, error: Error) {
+        activeCall = nil
         NSLog("[TwilioPhone] Call is reconnecting with error: \(error.localizedDescription)")
 
         if hasListeners {
@@ -56,6 +58,7 @@ class Twilio: RCTEventEmitter, CallDelegate {
     }
 
     func callDidReconnect(call: Call) {
+        activeCall = call
         NSLog("[TwilioPhone] Call did reconnect")
 
         if hasListeners {
@@ -64,6 +67,8 @@ class Twilio: RCTEventEmitter, CallDelegate {
     }
 
     func callDidDisconnect(call: Call, error: Error?) {
+        activeCall = nil
+
         if let error = error {
             NSLog("[TwilioPhone] Call disconnected with error: \(error.localizedDescription)")
 
@@ -80,8 +85,6 @@ class Twilio: RCTEventEmitter, CallDelegate {
                 sendEvent(withName: "CallDisconnected", body: ["callSid": call.sid])
             }
         }
-
-        activeCall = nil
     }
 
     @objc(startCall:withParams:)
@@ -107,22 +110,14 @@ class Twilio: RCTEventEmitter, CallDelegate {
         activeCall = nil
     }
 
-    @objc(isConnected:withRejecter:)
-    func isConnected(resolve: RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        NSLog("[TwilioPhone] callIsConnected")
-
-        if (activeCall === nil) {
-            resolve(false)
-            return
-        }
-
+    @objc
+    func isConnected(_ resolve: RCTPromiseResolveBlock) -> Void {
         resolve(true)
     }
 
     @objc(exitApp)
     func exitApp() -> Void {
         NSLog("[TwilioPhone] exitApp")
-
         exit(0)
     }
 

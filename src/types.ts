@@ -6,16 +6,3 @@ export enum EventType {
   CallDisconnected = 'CallDisconnected',
   CallDisconnectedError = 'CallDisconnectedError',
 }
-
-export type CallStats = {
-  localAudioTrackStats: Array<{
-    audioLevel: number;
-    jitter: number;
-    roundTripTime: number;
-  }>;
-  remoteAudioTrackStats: Array<{
-    audioLevel: number;
-    jitter: number;
-    mos: number;
-  }>;
-};
