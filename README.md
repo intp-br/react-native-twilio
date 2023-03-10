@@ -10,10 +10,6 @@ Only to start/stop calls. Don't need FCM configuration because this package don'
 yarn add @intp-br/react-native-twilio
 ```
 
-## TODO
-
-- Android (Kotlin) implementation
-
 ## Usage
 
 ```js
