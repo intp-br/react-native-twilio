@@ -35,11 +35,8 @@ export function endCall(): void {
   return Twilio.endCall();
 }
 
-export function exitAppIosOnly() {
-  if (Platform.OS !== 'ios') {
-    throw new Error('exitAppIosOnly is only available on iOS');
-  }
-  return Twilio.exitAppIosOnly();
+export function exitApp() {
+  return Twilio.exitApp();
 }
 
 export function multiply(a: number, b: number): Promise<number> {

@@ -119,9 +119,9 @@ class Twilio: RCTEventEmitter, CallDelegate {
         resolve(true)
     }
 
-    @objc(exitAppIosOnly)
-    func exitAppIosOnly() -> Void {
-        NSLog("[TwilioPhone] exitAppIosOnly")
+    @objc(exitApp)
+    func exitApp() -> Void {
+        NSLog("[TwilioPhone] exitApp")
 
         exit(0)
     }

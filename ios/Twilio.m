@@ -8,7 +8,7 @@ RCT_EXTERN_METHOD(isConnected: resolver:(RCTPromiseResolveBlock)resolve withReje
 RCT_EXTERN_METHOD(startCall:(NSString *)accessToken withParams:(NSDictionary *)params)
 
 RCT_EXTERN_METHOD(endCall)
-RCT_EXTERN_METHOD(exitAppIosOnly)
+RCT_EXTERN_METHOD(exitApp)
 
 + (BOOL)requiresMainQueueSetup
 {
