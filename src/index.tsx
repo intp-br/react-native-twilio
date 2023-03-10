@@ -18,6 +18,8 @@ const Twilio = NativeModules.Twilio
       }
     );
 
+export const twilioEmitter = new NativeEventEmitter(Twilio);
+
 export function isConnected(): Promise<boolean> {
   return Twilio.isConnected();
 }
@@ -32,8 +34,6 @@ export function startCall(
 export function endCall(): void {
   return Twilio.endCall();
 }
-
-export const TwilioEmitter = new NativeEventEmitter(Twilio);
 
 export function exitAppIosOnly() {
   if (Platform.OS !== 'ios') {
