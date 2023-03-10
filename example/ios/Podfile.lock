@@ -331,6 +331,7 @@ PODS:
     - glog
   - react-native-twilio (0.0.1):
     - React-Core
+    - TwilioVoice (~> 6.5)
   - React-perflogger (0.71.4)
   - React-RCTActionSheet (0.71.4):
     - React-Core/RCTActionSheetHeaders (= 0.71.4)
@@ -416,6 +417,7 @@ PODS:
     - React-logger (= 0.71.4)
     - React-perflogger (= 0.71.4)
   - SocketRocket (0.6.0)
+  - TwilioVoice (6.5.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -498,6 +500,7 @@ SPEC REPOS:
     - libevent
     - OpenSSL-Universal
     - SocketRocket
+    - TwilioVoice
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -606,7 +609,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d6b7fa9260aa3cb40afee0507e3bc1d17ecaa6f2
   React-jsinspector: 1f51e775819199d3fe9410e69ee8d4c4161c7b06
   React-logger: 0d58569ec51d30d1792c5e86a8e3b78d24b582c6
-  react-native-twilio: 7c7df316d46497aaf19a0fc3c9a61f6c768eaa32
+  react-native-twilio: fd3f15fbd7bd0e3c9821675b1eba674b6046a309
   React-perflogger: 0bb0522a12e058f6eb69d888bc16f40c16c4b907
   React-RCTActionSheet: bfd675a10f06a18728ea15d82082d48f228a213a
   React-RCTAnimation: 2fa220b2052ec75b733112aca39143d34546a941
@@ -621,6 +624,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 8fa50b38df6b992c76537993a2b0553d3b088004
   ReactCommon: b49a4b00ca6d181ff74b17c12b2d59ac4add0bde
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  TwilioVoice: a8c88ac563a11b02ded5de5deb8b8659f7ed2094
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
