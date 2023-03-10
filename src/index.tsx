@@ -38,10 +38,3 @@ export function endCall(): void {
 export function exitApp() {
   return Twilio.exitApp();
 }
-
-export function multiply(a: number, b: number): Promise<number> {
-  if (Platform.OS !== 'android') {
-    throw new Error('multiply is only available on Android');
-  }
-  return Twilio.multiply(a, b); // TODO: Sample code (remove this method)
-}

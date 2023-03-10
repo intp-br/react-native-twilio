@@ -1,18 +1,53 @@
 import {
   endCall,
   EventType,
-  multiply,
   startCall,
   twilioEmitter,
 } from '@intp-br/react-native-twilio';
 import * as React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  Button,
+  PermissionsAndroid,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 export default function App() {
   const [callInProgress, setCallInProgress] = React.useState(false);
 
   const placeCall = async () => {
-    startCall('your_token_here  ', { foo: 'bar' });
+    if (Platform.OS === 'android') {
+      const granted = await askRecordAudioPermission();
+      if (!granted) {
+        Alert.alert('Permission denied', 'You need to grant permission');
+        return;
+      }
+    }
+    console.log('Place call');
+    startCall('YOUR_TOKEN', { foo: 'bar' });
+  };
+
+  const askRecordAudioPermission = async () => {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.RECORD_AUDIO!,
+      {
+        title: 'Record Audio Permission',
+        message: 'App needs access to your microphone ',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the microphone');
+      return true;
+    } else {
+      console.log('Microphone permission denied');
+      return false;
+    }
   };
 
   const hangUp = async () => {
@@ -45,12 +80,6 @@ export default function App() {
     };
   }, []);
 
-  const androidTest = async () => {
-    console.log(`androidTest`);
-    const result = await multiply(3, 3);
-    console.log(`androidTest LOG:  result:`, result);
-  };
-
   return (
     <View style={styles.container}>
       <Text>Call in progress: {callInProgress ? 'Yes' : 'No'}</Text>
@@ -58,7 +87,6 @@ export default function App() {
         title={callInProgress ? 'Hang up call' : 'Place call'}
         onPress={() => (callInProgress ? hangUp() : placeCall())}
       />
-      <Button title="Android test" onPress={() => androidTest()} />
     </View>
   );
 }

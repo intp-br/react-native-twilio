@@ -118,6 +118,14 @@ const styles = StyleSheet.create({
 - iOS [ios-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/ios)
 - Android [android-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/android)
 
+
+## Android permissions needed
+
+Put RECORD_AUDIO permission at your manifest file.
+
+```
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+```
 ## License
 
 MIT
