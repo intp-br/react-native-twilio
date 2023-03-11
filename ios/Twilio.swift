@@ -111,8 +111,8 @@ class Twilio: RCTEventEmitter, CallDelegate {
     }
 
     @objc
-    func isConnected(_ resolve: RCTPromiseResolveBlock) -> Void {
-        resolve(true)
+    func isConnected(_ resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
+        resolve(activeCall !== nil)
     }
 
     @objc(exitApp)
