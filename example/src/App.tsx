@@ -28,7 +28,7 @@ export default function App() {
       }
     }
     console.log('Place call');
-    startCall('xpto', { foo: 'bar' });
+    startCall('access_token', { foo: 'bar' });
   };
 
   const askRecordAudioPermission = async () => {
