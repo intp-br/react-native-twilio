@@ -104,16 +104,10 @@ const styles = StyleSheet.create({
 });
 ```
 
-## Version of Twilio SDK
+## Twilio official SDK's
 
 - [v6.1.2 (Android)](https://www.twilio.com/docs/voice/sdks/android/3x-changelog#612)
 - [v6.5.0 (iOS)](https://www.twilio.com/docs/voice/sdks/ios/changelog#650)
-
-## Twilio official SDK's
-
-- iOS [ios-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/ios)
-- Android [android-twilio](https://www.twilio.com/pt-br/docs/voice/sdks/android)
-
 
 ## Android permissions needed
 
