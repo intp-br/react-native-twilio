@@ -174,6 +174,11 @@ class TwilioModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
     exitProcess(0)
   }
 
+  @ReactMethod
+  fun isConnected(promise: Promise) {
+    promise.resolve(activeCall !== null)
+  }
+
   companion object {
     const val NAME = "Twilio"
   }
